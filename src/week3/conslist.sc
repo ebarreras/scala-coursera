@@ -49,3 +49,13 @@ object Lists {
 
 	def of[T](e: T): List[T] = new Cons[T](e, new Nil[T])
 }
+
+object List {
+
+	def List[T]() = new Nil[T]
+
+	def List[T](e: T) = new Cons[T](e, new Nil[T])
+	
+	def List[T](e1: T, e2: T) = new Cons[T](e1, new Cons[T](e2, new Nil[T]))
+
+}
