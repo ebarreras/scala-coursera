@@ -2,7 +2,7 @@ package week6
 
 import io.Source
 
-object phonenumbers {
+object phonenumbersmartin {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
   
   val in = Source.fromURL("http://lamp.epfl.ch/files/content/sites/lamp/files/teaching/progfun/linuxwords.txt")
@@ -23,8 +23,8 @@ object phonenumbers {
                                                   //| ness, abjure, abjured, abjures, abjuring, ablate, ablated, ablates, ablating
                                                   //| , ablation, ablative, ab
                                                   //| Output exceeds cutoff limit.
-                                     
-                                     
+     
+                              
 
   val mnem = Map('2' -> "ABC", '3' -> "DEF", '4' -> "GHI", '5' -> "JKL",
   							 '6' -> "MNO", '7' -> "PQRS", '8' -> "TUV", '9' -> "WXYZ")
@@ -39,7 +39,8 @@ object phonenumbers {
                                                   //> wordCode: (word: String)String
  
  	wordCode("Java")                          //> res0: String = 5282
- 
+ 	
+ 	
   val wordsForNum: Map[String, List[String]] =
   	words groupBy wordCode withDefaultValue List()
                                                   //> wordsForNum  : Map[String,List[String]] = Map(63972278 -> List(newscast), 29
@@ -72,15 +73,12 @@ object phonenumbers {
   def translate(number: String): Set[String] =
   	encode(number) map (_ mkString " ")       //> translate: (number: String)Set[String]
   
-  //def turn[K, V](m: Map[K,V]): Map[V, K] =
-  //	for (e <- m) yield (e._2 -> e._1)
-  //turn(Map(1 -> 'A', 2 -> 'B', 2 -> 'C'))
-  	
   charCode(mnem)                                  //> res1: Map[Char,Char] = Map(E -> 3, X -> 9, N -> 6, T -> 8, Y -> 9, J -> 5, 
                                                   //| U -> 8, F -> 3, A -> 2, M -> 6, I -> 4, G -> 4, V -> 8, Q -> 7, L -> 5, B -
                                                   //| > 2, P -> 7, C -> 2, H -> 4, W -> 9, K -> 5, R -> 7, O -> 6, D -> 3, Z -> 9
                                                   //| , S -> 7)
-  translate("7225247386")                         //> res2: Set[String] = Set(sack air fun, pack ah re to, pack bird to, Scala ir
+  translate("11111112229")                        //> res2: Set[String] = Set()
+  translate("7225247386")                         //> res3: Set[String] = Set(sack air fun, pack ah re to, pack bird to, Scala ir
                                                   //| e to, Scala is fun, rack ah re to, pack air fun, sack bird to, rack bird to
                                                   //| , sack ah re to, rack air fun)
 }
