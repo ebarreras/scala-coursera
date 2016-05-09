@@ -1,19 +1,18 @@
 package week7
 
 object water {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  println("Welcome to the Scala worksheet")
   
   def makeGlasses(sizes: Seq[Int]) = new Glasses((sizes map ((_, 0))).toVector)
-                                                  //> makeGlasses: (sizes: Seq[Int])week7.Glasses
   
-  val glasses1 = makeGlasses(List(9,4))           //> glasses1  : week7.Glasses = Vector((9,0), (4,0))
-  val glasses2 = makeGlasses(List(9,4))           //> glasses2  : week7.Glasses = Vector((9,0), (4,0))
+  val glasses1 = makeGlasses(List(9,4))
+  val glasses2 = makeGlasses(List(9,4))
   
-  glasses1.equals(glasses2)                       //> res0: Boolean = true
-  glasses1.get(1)                                 //> res1: (Int, Int) = (4,0)
- 	glasses1.hasGlassWith(3)                  //> res2: Boolean = false
- 	glasses1.hasGlassWith(5)                  //> res3: Boolean = false
- 	glasses1.fill(1).pour(1, 0).canPour(1, 0) //> res4: Boolean = false
+  glasses1.equals(glasses2)
+  glasses1.get(1)
+ 	glasses1.hasGlassWith(3)
+ 	glasses1.hasGlassWith(5)
+ 	glasses1.fill(1).pour(1, 0).canPour(1, 0)
  	
  	def how(glasses: Glasses, target: Int): Option[List[String]] = {
  		def iter(state: Glasses, past: Set[Glasses], actions: List[String]): Option[List[String]] = {
@@ -30,23 +29,15 @@ object water {
  				
  				lazy val byThrowingAway = (0 until glasses.count) filter (!state.isEmpty(_)) map (i => {val newState = state.toSink(i); iter(newState, past + state, ("throw away " + i + ": " + newState) :: actions)}) find ( _.isDefined )
  				
- 				byFilling.getOrElse(byPouring.getOrElse(byThrowingAway.getOrElse(None)))
+ 				byFilling.orElse(byPouring).orElse(byThrowingAway)
  			}
  		}
  		
 		val past: Set[Glasses] = Set()
 		iter(glasses, past, Nil).map(_.reverse)
-	}                                         //> how: (glasses: week7.Glasses, target: Int)Option[List[String]]
+	}
 	
-	how(glasses1, 6) map (_  mkString "\n")   //> res5: Option[List[String]] = Some(List(fill 0: Vector((9,9), (4,0)), fill 1
-                                                  //| : Vector((9,9), (4,4)), throw away 0: Vector((9,0), (4,4)), pour 1 into 0: 
-                                                  //| Vector((9,4), (4,0)), fill 1: Vector((9,4), (4,4)), pour 1 into 0: Vector((
-                                                  //| 9,8), (4,0)), fill 1: Vector((9,8), (4,4)), pour 1 into 0: Vector((9,9), (4
-                                                  //| ,3)), throw away 0: Vector((9,0), (4,3)), pour 1 into 0: Vector((9,3), (4,0
-                                                  //| )), fill 1: Vector((9,3), (4,4)), pour 1 into 0: Vector((9,7), (4,0)), fill
-                                                  //|  1: Vector((9,7), (4,4)), pour 1 into 0: Vector((9,9), (4,2)), throw away 0
-                                                  //| : Vector((9,0), (4,2)), pour 1 into 0: Vector((9,2), (4,0)), fill 1: Vector
-                                                  //| ((9,2), (4,4)), pour 1 into 0: Vector((9,6), (4,0))))
+	how(glasses1, 6) map (_  mkString "\n")
 	
 }
 
